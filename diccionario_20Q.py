@@ -1,0 +1,161 @@
+class Nodo:
+    def __init__(self, pregunta=None, respuesta=None):
+        self.pregunta = pregunta
+        self.respuesta = respuesta
+        self.si = None
+        self.no = None
+
+def construir_arbol(diccionario):
+    if isinstance(diccionario, str):  # Si es una respuesta final
+        return Nodo(respuesta=diccionario)
+    
+    pregunta = list(diccionario.keys())[0]
+    nodo = Nodo(pregunta=pregunta)
+    nodo.si = construir_arbol(diccionario[pregunta]["si"])
+    nodo.no = construir_arbol(diccionario[pregunta]["no"])
+    return nodo
+
+def preguntar(mensaje):
+    """Función para obtener respuesta sí/no del usuario"""
+    respuesta = ""
+    while respuesta not in ("si", "no"):
+        respuesta = input(mensaje + " (si/no): ").strip().lower()
+    return respuesta == "si"
+
+def jugar(nodo, intentos=0):
+    """Función para recorrer el árbol y aprender nuevas respuestas"""
+    if intentos >= 20:
+        print("¡He perdido! No logré adivinar en 20 preguntas.")
+        return
+    
+    if nodo.respuesta:
+        print(f"¿Estás pensando en {nodo.respuesta}?")
+        if preguntar("¿Adiviné correctamente?"):
+            print("¡Genial! :))")
+        else:
+            print("¡Vaya! Parece que necesito más conocimiento.")
+            nueva_respuesta = input("¿En qué estabas pensando? ").strip()
+            nueva_pregunta = input(f"¿Qué pregunta distingue {nueva_respuesta} de {nodo.respuesta}? ").strip()
+            es_si = preguntar(f"Si fuera {nueva_respuesta}, ¿la respuesta a '{nueva_pregunta}' sería 'sí'?")
+            
+            nodo.pregunta = nueva_pregunta
+            if es_si:
+                nodo.si = Nodo(respuesta=nueva_respuesta)
+                nodo.no = Nodo(respuesta=nodo.respuesta)
+            else:
+                nodo.si = Nodo(respuesta=nodo.respuesta)
+                nodo.no = Nodo(respuesta=nueva_respuesta)
+
+            nodo.respuesta = None
+    else:
+        if preguntar(nodo.pregunta):
+            jugar(nodo.si, intentos + 1)
+        else:
+            jugar(nodo.no, intentos + 1)
+
+estructura_arbol = {
+    "¿Es un ser vivo?": {
+        "si": {
+            "¿Es un animal?": {
+                "si": {
+                    "¿Es un mamífero?": {
+                        "si": {
+                            "¿Es carnívoro?": {
+                                "si": "un felino",
+                                "no": "un herbívoro"
+                            }
+                        },
+                        "no": {
+                            "¿Vuela?": {
+                                "si": "un ave",
+                                "no": {
+                                    "¿Es acuático?": {
+                                        "si": "un pez",
+                                        "no": "un reptil"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "no": {
+                    "¿Es un tipo de planta?": {
+                        "si": "un árbol",
+                        "no": "una flor"
+                    }
+                }
+            }
+        },
+        "no": {
+            "¿Es un objeto hecho por humanos?": {
+                "si": {
+                    "¿Se usa para comer?": {
+                        "si": {
+                            "¿Se usa para cocinar?": {
+                                "si": "una sartén",
+                                "no": "un utensilio"
+                            }
+                        },
+                        "no": {
+                            "¿Produce sonido?": {
+                                "si": {
+                                    "¿Tiene cuerdas?": {
+                                        "si": "un instrumento musical de cuerda",
+                                        "no": "un instrumento de viento"
+                                    }
+                                },
+                                "no": {
+                                    "¿Se usa para construcción?": {
+                                        "si": "una herramienta",
+                                        "no": {
+                                            "¿Es un vehículo?": {
+                                                "si": {
+                                                    "¿Usa ruedas?": {
+                                                        "si": "un automóvil",
+                                                        "no": "una bicicleta"
+                                                    }
+                                                },
+                                                "no": "un barco"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "no": {
+                    "¿Es natural?": {
+                        "si": {
+                            "¿Es un mineral?": {
+                                "si": "una roca o mineral",
+                                "no": "un metal"
+                            }
+                        },
+                        "no": {
+                            "¿Es un fenómeno natural?": {
+                                "si": "un rayo",
+                                "no": {
+                                    "¿Es un cuerpo celeste?": {
+                                        "si": "una estrella",
+                                        "no": "un planeta"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+raiz = construir_arbol(estructura_arbol)
+
+while True:
+    print("\nPiensa en algo y responderé con preguntas.")
+    jugar(raiz)
+    if not preguntar("¿Quieres jugar de nuevo?"):
+        break
+
+print("¡Gracias por jugar!")
