@@ -64,17 +64,67 @@ estructura_arbol = {
                     "¿Es un mamífero?": {
                         "si": {
                             "¿Es carnívoro?": {
-                                "si": "un felino",
-                                "no": "un herbívoro"
+                                "si": {
+                                    "¿Es un felino?": {
+                                        "si": "un tigre",
+                                        "no": {
+                                            "¿Es un cánido?": {
+                                                "si": "un lobo",
+                                                "no": "un oso"
+                                            }
+                                        }
+                                    }
+                                },
+                                "no": {
+                                    "¿Es un herbívoro grande?": {
+                                        "si": {
+                                            "¿Tiene trompa?": {
+                                                "si": "un elefante",
+                                                "no": "una jirafa"
+                                            }
+                                        },
+                                        "no": {
+                                            "¿Salta?": {
+                                                "si": "un canguro",
+                                                "no": "un ciervo"
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         },
                         "no": {
-                            "¿Vuela?": {
-                                "si": "un ave",
+                            "¿Tiene plumas?": {
+                                "si": {
+                                    "¿Vuela?": {
+                                        "si": {
+                                            "¿Es un ave rapaz?": {
+                                                "si": "un águila",
+                                                "no": "un loro"
+                                            }
+                                        },
+                                        "no": "un pingüino"
+                                    }
+                                },
                                 "no": {
                                     "¿Es acuático?": {
-                                        "si": "un pez",
-                                        "no": "un reptil"
+                                        "si": {
+                                            "¿Tiene caparazón?": {
+                                                "si": "una tortuga marina",
+                                                "no": "un tiburón"
+                                            }
+                                        },
+                                        "no": {
+                                            "¿Es un reptil?": {
+                                                "si": {
+                                                    "¿Es venenoso?": {
+                                                        "si": "una cobra",
+                                                        "no": "una iguana"
+                                                    }
+                                                },
+                                                "no": "un anfibio"
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -82,9 +132,14 @@ estructura_arbol = {
                     }
                 },
                 "no": {
-                    "¿Es un tipo de planta?": {
-                        "si": "un árbol",
-                        "no": "una flor"
+                    "¿Es una planta?": {
+                        "si": {
+                            "¿Da frutos?": {
+                                "si": "un manzano",
+                                "no": "un pino"
+                            }
+                        },
+                        "no": "un hongo"
                     }
                 }
             }
