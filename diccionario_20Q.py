@@ -59,34 +59,75 @@ def jugar(nodo, intentos=0):
 estructura_arbol = {
     "¿Es un ser vivo?": {
         "si": {
-            "¿Es un animal?": {
-                "si": {
-                    "¿Es un mamífero?": {
+            "¿Es un humano?": {
+                "si" : "una persona",
+                "no" :{
+                    "¿Es un animal?": {
                         "si": {
-                            "¿Es carnívoro?": {
+                            "¿Es un mamífero?": {
                                 "si": {
-                                    "¿Es un felino?": {
-                                        "si": "un tigre",
+                                    "¿Es carnívoro?": {
+                                        "si": {
+                                            "¿Es un felino?": {
+                                                "si": "un tigre",
+                                                "no": {
+                                                    "¿Es un cánido?": {
+                                                        "si": "un lobo",
+                                                        "no": "un oso"
+                                                    }
+                                                }
+                                            }
+                                        },
                                         "no": {
-                                            "¿Es un cánido?": {
-                                                "si": "un lobo",
-                                                "no": "un oso"
+                                            "¿Es un herbívoro grande?": {
+                                                "si": {
+                                                    "¿Tiene trompa?": {
+                                                        "si": "un elefante",
+                                                        "no": "una jirafa"
+                                                    }
+                                                },
+                                                "no": {
+                                                    "¿Salta?": {
+                                                        "si": "un canguro",
+                                                        "no": "un ciervo"
+                                                    }
+                                                }
                                             }
                                         }
                                     }
                                 },
                                 "no": {
-                                    "¿Es un herbívoro grande?": {
+                                    "¿Tiene plumas?": {
                                         "si": {
-                                            "¿Tiene trompa?": {
-                                                "si": "un elefante",
-                                                "no": "una jirafa"
+                                            "¿Vuela?": {
+                                                "si": {
+                                                    "¿Es un ave rapaz?": {
+                                                        "si": "un águila",
+                                                        "no": "un loro"
+                                                    }
+                                                },
+                                                "no": "un pingüino"
                                             }
                                         },
                                         "no": {
-                                            "¿Salta?": {
-                                                "si": "un canguro",
-                                                "no": "un ciervo"
+                                            "¿Es acuático?": {
+                                                "si": {
+                                                    "¿Tiene caparazón?": {
+                                                        "si": "una tortuga marina",
+                                                        "no": "un tiburón"
+                                                    }
+                                                },
+                                                "no": {
+                                                    "¿Es un reptil?": {
+                                                        "si": {
+                                                            "¿Es venenoso?": {
+                                                                "si": "una cobra",
+                                                                "no": "una iguana"
+                                                            }
+                                                        },
+                                                        "no": "un anfibio"
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -94,55 +135,30 @@ estructura_arbol = {
                             }
                         },
                         "no": {
-                            "¿Tiene plumas?": {
+                            "¿Es una planta?": {
                                 "si": {
-                                    "¿Vuela?": {
-                                        "si": {
-                                            "¿Es un ave rapaz?": {
-                                                "si": "un águila",
-                                                "no": "un loro"
-                                            }
-                                        },
-                                        "no": "un pingüino"
+                                    "¿Da frutos?": {
+                                        "si": "un manzano",
+                                        "no": "un pino"
                                     }
                                 },
                                 "no": {
-                                    "¿Es acuático?": {
-                                        "si": {
-                                            "¿Tiene caparazón?": {
-                                                "si": "una tortuga marina",
-                                                "no": "un tiburón"
-                                            }
-                                        },
+                                    "¿Es un arbol?": {
+                                        "si": "un arbol",
                                         "no": {
-                                            "¿Es un reptil?": {
-                                                "si": {
-                                                    "¿Es venenoso?": {
-                                                        "si": "una cobra",
-                                                        "no": "una iguana"
-                                                    }
-                                                },
-                                                "no": "un anfibio"
+                                            "¿Es un hongo?": {
+                                                "si" : "un hongo",
+                                                "no" : "un arbusto"
+                                                }
                                             }
                                         }
                                     }
-                                }
                             }
                         }
                     }
-                },
-                "no": {
-                    "¿Es una planta?": {
-                        "si": {
-                            "¿Da frutos?": {
-                                "si": "un manzano",
-                                "no": "un pino"
-                            }
-                        },
-                        "no": "un hongo"
-                    }
                 }
             }
+            
         },
         "no": {
             "¿Es un objeto hecho por humanos?": {
@@ -195,7 +211,12 @@ estructura_arbol = {
                                     "¿Es un alimento?": {
                                         "si": {
                                             "¿Es dulce?": {
-                                                "si": "un postre",
+                                                "si": { 
+                                                    "¿Es horneado?" : {
+                                                        "si": "un pan",
+                                                        "no": "un postre"
+                                                     }
+                                                },
                                                 "no": {
                                                     "¿Es salado?": {
                                                         "si": "un platillo salado",
@@ -254,7 +275,12 @@ estructura_arbol = {
                                                         "no": {
                                                             "¿Es un mueble?": {
                                                                 "si": "un mueble",
-                                                                "no": "un artículo de la casa"
+                                                                "no": {
+                                                                    "Se usa para entretenimiento" :{
+                                                                        "si" : "una pelicula o un serie",
+                                                                        "no" :"un artículo de la casa"
+                                                                    }
+                                                                }
                                                             }
                                                         }
                                                     }
