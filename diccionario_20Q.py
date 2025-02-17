@@ -47,6 +47,9 @@ def jugar(nodo, intentos=0):
                 nodo.no = Nodo(respuesta=nueva_respuesta)
 
             nodo.respuesta = None
+        #seguir jugando aunque no adivine, mientras no pase de 20
+        if intentos < 20:
+            jugar(nodo, intentos +1)
     else:
         if preguntar(nodo.pregunta):
             jugar(nodo.si, intentos + 1)
@@ -89,33 +92,98 @@ estructura_arbol = {
         "no": {
             "¿Es un objeto hecho por humanos?": {
                 "si": {
-                    "¿Se usa para comer?": {
+                    "¿Es un aparato electrónico?": {
                         "si": {
-                            "¿Se usa para cocinar?": {
-                                "si": "una sartén",
-                                "no": "un utensilio"
-                            }
-                        },
-                        "no": {
-                            "¿Produce sonido?": {
+                            "¿Se usa para comunicarse?": {
                                 "si": {
-                                    "¿Tiene cuerdas?": {
-                                        "si": "un instrumento musical de cuerda",
-                                        "no": "un instrumento de viento"
+                                    "¿Tiene pantalla táctil?": {
+                                        "si": "un teléfono móvil",
+                                        "no": "un teléfono fijo"
                                     }
                                 },
                                 "no": {
-                                    "¿Se usa para construcción?": {
-                                        "si": "una herramienta",
+                                    "¿Se usa para entretenimiento?": {
+                                        "si": {
+                                            "¿Es portátil?": {
+                                                "si": "una consola de videojuegos portátil",
+                                                "no": "una televisión"
+                                            }
+                                        },
                                         "no": {
-                                            "¿Es un vehículo?": {
+                                            "¿Se usa para trabajar?": {
                                                 "si": {
-                                                    "¿Usa ruedas?": {
-                                                        "si": "un automóvil",
-                                                        "no": "una bicicleta"
+                                                    "¿Tiene teclado?": {
+                                                        "si": "una computadora portátil",
+                                                        "no": "una tablet"
                                                     }
                                                 },
-                                                "no": "un barco"
+                                                "no": {
+                                                    "¿Es un electrodoméstico?": {
+                                                        "si": {
+                                                            "¿Se usa para cocinar?": {
+                                                                "si": "un microondas",
+                                                                "no": "una lavadora"
+                                                            }
+                                                        },
+                                                        "no": "un reloj inteligente"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        "no": {
+                            "¿Se usa para comer?": {
+                                "si": {
+                                    "¿Es un alimento?": {
+                                        "si": {
+                                            "¿Es dulce?": {
+                                                "si": "un postre",
+                                                "no": {
+                                                    "¿Es salado?": {
+                                                        "si": "un platillo salado",
+                                                        "no": "un vegetal"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "no": {
+                                            "¿Es una bebida?": {
+                                                "si": {
+                                                    "¿Es caliente?": {
+                                                        "si": "un café",
+                                                        "no": "un refresco"
+                                                    }
+                                                },
+                                                "no": "un utensilio"
+                                            }
+                                        }
+                                    }
+                                },
+                                "no": {
+                                    "¿Produce sonido?": {
+                                        "si": {
+                                            "¿Tiene cuerdas?": {
+                                                "si": "un instrumento musical de cuerda",
+                                                "no": "un instrumento de viento"
+                                            }
+                                        },
+                                        "no": {
+                                            "¿Se usa para construcción?": {
+                                                "si": "una herramienta", 
+                                                "no": {
+                                                    "¿Es un vehículo?": {
+                                                        "si": {
+                                                            "¿Usa ruedas?": {
+                                                                "si": "un automóvil",
+                                                                "no": "una bicicleta"
+                                                            }
+                                                        },
+                                                        "no": "un barco"
+                                                    }
+                                                }
                                             }
                                         }
                                     }
@@ -125,20 +193,30 @@ estructura_arbol = {
                     }
                 },
                 "no": {
-                    "¿Es natural?": {
+                    "¿Es un artículo de ropa o accesorio?": {  
                         "si": {
-                            "¿Es un mineral?": {
-                                "si": "una roca o mineral",
-                                "no": "un metal"
+                            "¿Es algo que se lleva en el cuerpo?": {
+                                "si": "una prenda de ropa",
+                                "no": "un accesorio"
                             }
                         },
                         "no": {
-                            "¿Es un fenómeno natural?": {
-                                "si": "un rayo",
+                            "¿Es natural?": {
+                                "si": {
+                                    "¿Es un mineral?": {
+                                        "si": "una roca o mineral",
+                                        "no": "un metal"
+                                    }
+                                },
                                 "no": {
-                                    "¿Es un cuerpo celeste?": {
-                                        "si": "una estrella",
-                                        "no": "un planeta"
+                                    "¿Es un fenómeno natural?": {
+                                        "si": "un rayo",
+                                        "no": {
+                                            "¿Es un cuerpo celeste?": {
+                                                "si": "una estrella",
+                                                "no": "un planeta"
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -150,8 +228,10 @@ estructura_arbol = {
     }
 }
 
+# Construir el árbol
 raiz = construir_arbol(estructura_arbol)
 
+# Jugar
 while True:
     print("\nPiensa en algo y responderé con preguntas.")
     jugar(raiz)
