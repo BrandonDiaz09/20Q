@@ -163,25 +163,45 @@ estructura_arbol = {
                                     }
                                 },
                                 "no": {
-                                    "¿Produce sonido?": {
+                                    "¿Es un medio de transporte?": {
                                         "si": {
-                                            "¿Tiene cuerdas?": {
-                                                "si": "un instrumento musical de cuerda",
-                                                "no": "un instrumento de viento"
+                                            "¿Se usa en el agua?": {
+                                                "si": "un barco",
+                                                "no": {
+                                                    "¿Usa motor?": {
+                                                        "si": "un automóvil",
+                                                        "no": "una bicicleta"
+                                                    }
+                                                }
                                             }
                                         },
                                         "no": {
-                                            "¿Se usa para construcción?": {
-                                                "si": "una herramienta", 
+                                            "¿Es un instrumento?": {
+                                                "si": {
+                                                    "¿Se usa para construcción?": {
+                                                        "si": "una herramienta",
+                                                        "no": {
+                                                            "¿Es un instrumento musical?": {
+                                                                "si": "un instrumento musical",
+                                                                "no": "un instrumento de medición"
+                                                            }
+                                                        }
+                                                    }
+                                                },
                                                 "no": {
-                                                    "¿Es un vehículo?": {
+                                                    "¿Es un artículo de ropa o accesorio?": {
                                                         "si": {
-                                                            "¿Usa ruedas?": {
-                                                                "si": "un automóvil",
-                                                                "no": "una bicicleta"
+                                                            "¿Es ropa?": {
+                                                                "si": "una prenda de ropa",
+                                                                "no": "un accesorio"
                                                             }
                                                         },
-                                                        "no": "un barco"
+                                                        "no": {
+                                                            "¿Es un mueble?": {
+                                                                "si": "un mueble",
+                                                                "no": "un artículo de la casa"
+                                                            }
+                                                        }
                                                     }
                                                 }
                                             }
@@ -193,30 +213,20 @@ estructura_arbol = {
                     }
                 },
                 "no": {
-                    "¿Es un artículo de ropa o accesorio?": {  
+                    "¿Es natural?": {
                         "si": {
-                            "¿Es algo que se lleva en el cuerpo?": {
-                                "si": "una prenda de ropa",
-                                "no": "un accesorio"
+                            "¿Es un mineral?": {
+                                "si": "una roca o mineral",
+                                "no": "un metal"
                             }
                         },
                         "no": {
-                            "¿Es natural?": {
-                                "si": {
-                                    "¿Es un mineral?": {
-                                        "si": "una roca o mineral",
-                                        "no": "un metal"
-                                    }
-                                },
+                            "¿Es un fenómeno natural?": {
+                                "si": "un rayo",
                                 "no": {
-                                    "¿Es un fenómeno natural?": {
-                                        "si": "un rayo",
-                                        "no": {
-                                            "¿Es un cuerpo celeste?": {
-                                                "si": "una estrella",
-                                                "no": "un planeta"
-                                            }
-                                        }
+                                    "¿Es un cuerpo celeste?": {
+                                        "si": "una estrella",
+                                        "no": "un planeta"
                                     }
                                 }
                             }
