@@ -48,8 +48,8 @@ def jugar(nodo, intentos=0):
 
             nodo.respuesta = None
         #seguir jugando aunque no adivine, mientras no pase de 20
-        if intentos < 20:
-            jugar(nodo, intentos +1)
+        #if intentos < 20:
+        #    jugar(nodo, intentos +1)
     else:
         if preguntar(nodo.pregunta):
             jugar(nodo.si, intentos + 1)
@@ -296,10 +296,25 @@ estructura_arbol = {
                 "no": {
                     "¿Es natural?": {
                         "si": {
-                            "¿Es un mineral?": {
-                                "si": "una roca o mineral",
-                                "no": "un metal"
-                            }
+                            "¿Es un cuerpo de agua?" : {
+                                "si":{
+                                    "¿Es de agua salda?": {
+                                        "si": "oceano",
+                                        "no": {
+                                            "¿Lleva corriente?":{
+                                                "si": "un rio",
+                                                "no": "un lago"
+                                            }
+                                        }
+                                    }
+                                    },
+                                "no":{
+                                    "¿Es un mineral?": {
+                                        "si": "una roca o mineral",
+                                        "no": "un metal"
+                                    }
+                                }
+                            },
                         },
                         "no": {
                             "¿Es un fenómeno natural?": {
